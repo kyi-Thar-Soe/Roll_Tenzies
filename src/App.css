@@ -50,6 +50,15 @@
   font-weight: 700;
   margin-top: 30px;
 }
+.win--condition{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.time{
+  margin-top: 10px;
+}
 .confetti{
   margin: auto;
 }

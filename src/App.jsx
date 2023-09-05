@@ -9,6 +9,8 @@ import Confetti from 'react-confetti'
 function App() {
   const [randomNumbers,setRandomNumbers] = useState([]);
   const [tenzies,setTenzies] = useState(false);
+  const [gameStartTime, setGameStartTime] = useState(null);
+  const [gameDuration, setGameDuration] = useState(0);
   
   const generateNewDie = () => {
     return {
@@ -23,7 +25,9 @@ function App() {
     for(let i=0; i<10; i++){
       newArray.push(generateNewDie());
     }
-    setRandomNumbers(newArray)
+    setRandomNumbers(newArray);
+    setGameStartTime(Date.now()); // Initialize game start time
+    setGameDuration(0);
   };
    useEffect(() => {
     generateRandomNumbers();
@@ -55,13 +59,15 @@ function App() {
     const firstValue = randomNumbers.length>0 ? randomNumbers[0].value : 0;
     const allSameValue = randomNumbers.every(die => die.value === firstValue)
     if (allHeld && allSameValue) {
-        setTenzies(true)
+        setTenzies(true);
+        const currentTime = Date.now();
+        setGameDuration(Math.floor((currentTime - gameStartTime) / 1000));
     }else{
       setTenzies(false)
     }
-}, [randomNumbers]);
+  }, [randomNumbers,gameStartTime]);
 
-  return (
+return (
     <div className="parent--div col col-md-6">
       <div className="child--div col col-md-10">
       <h1 className="title">Tenzies</h1>
@@ -77,12 +83,15 @@ function App() {
                       toggle={()=>holdDie(num.id)}/>
         })}
       </div>
-      {tenzies? <button className="btn new--die" onClick={generateRandomNumbers}>New Game</button> : 
+      {tenzies? 
+      <div className="win--condition">
+        <button className="btn new--die" onClick={generateRandomNumbers}>New Game</button>
+        <p className="time">Time to win: <span className="fw-bold">{gameDuration}</span> seconds</p>
+      </div> : 
       <button className="btn roll--die" onClick={rollDie}>Roll</button>}
     </div>
     </div>
   )
 }
-
 
 export default App
