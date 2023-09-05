@@ -1,0 +1,60 @@
+*{
+  box-sizing: border-box;
+}
+.parent--div{
+  margin: auto;
+  margin-top: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 10px;
+  background-color: #0b2434;
+ 
+}
+.child--div{
+  margin: auto;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+.title{
+  font-weight: 700;
+}
+.instructions{
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.die--container{
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+.roll--die{
+  background-color: #5035ff;
+  color: white;
+  font-size: 16px;
+  width: 100px;
+  font-weight: 700;
+  margin-top: 30px;
+}
+.new--die{
+  background-color: #5035ff;
+  color: white;
+  font-size: 16px;
+  width: 150px;
+  font-weight: 700;
+  margin-top: 30px;
+}
+.confetti{
+  margin: auto;
+}
+@media only screen and (max-width: 768px) {
+  .child--div{
+    width: 400px;
+  }
+}
